@@ -24,10 +24,12 @@ public class MoveThePlayer : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.Log("mouse position");
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 agentenavmesh.SetDestination(hit.point);
+                Debug.Log("SetDestination");
             }
 
         }
