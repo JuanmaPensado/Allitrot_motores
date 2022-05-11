@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vel: 3
+  deathEffect: {fileID: 2715151640702213222, guid: de90802c11b16e5438818a237f1711fd,
+    type: 3}
+  health: 200
 --- !u!1001 &6406241384827152079
 PrefabInstance:
   m_ObjectHideFlags: 0

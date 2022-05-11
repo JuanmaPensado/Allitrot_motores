@@ -7,7 +7,7 @@ public class Enemigo : MonoBehaviour
     public float vel = 10f;
     private Transform target;
     private int waypointIndex = 0;
-
+    public GameObject deathEffect;
     public int health = 100;
 
     void Start()
@@ -39,7 +39,10 @@ public class Enemigo : MonoBehaviour
 
     void EndPath (){
         playerStats.Lives--;
+        GameObject effect = (GameObject) Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
         Destroy(gameObject);
+
     }
 
     public void TakeDamage(int amount){
@@ -50,6 +53,8 @@ public class Enemigo : MonoBehaviour
     }
 
     void Die(){
+        GameObject effect = (GameObject) Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        Destroy(effect, 5f);
     }
 }

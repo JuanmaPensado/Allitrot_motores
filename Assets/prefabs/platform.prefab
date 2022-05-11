@@ -113,3 +113,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverColor: {r: 0.79558194, g: 1, b: 0.50377357, a: 1}
+  BuildEffect: {fileID: 74834938843435735, guid: 443a9ddf1f9ce814fbb2c98500a48036,
+    type: 3}

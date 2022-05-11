@@ -9,6 +9,7 @@ public class platform : MonoBehaviour
     private Color startColor2;
     private GameObject turret;
     public Color hoverColor;
+    public GameObject BuildEffect;
 
     void Start(){
         rend = GetComponent<Renderer>();
@@ -34,5 +35,7 @@ public class platform : MonoBehaviour
 
         GameObject turretToBuild = buildManager.instance.GetTurretToBuild();
         turret = (GameObject) Instantiate(turretToBuild, transform.position , transform.rotation);
+        GameObject effect = (GameObject) Instantiate(BuildEffect, transform.position, Quaternion.identity);
+        Destroy(effect,2f);
     }
 }
