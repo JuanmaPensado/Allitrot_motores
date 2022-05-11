@@ -4,11 +4,15 @@ using UnityEngine.UI;
 
 public class wavespawner : MonoBehaviour
 {
-    public Transform enemyPrefab;
+    [Header ("Attributes")]
+    public float countdown = 10f;
     public float timeBetweenWaves = 10f;
+    public float spawnrate = 2f;
+
+    [Header("Unity Setup")]
+    public Transform enemyPrefab;
     public Transform spawnPoint;
     public Text wavecountdowntext;
-    public float countdown = 10f;
     private int waveIndex = 1;
 
 
@@ -21,14 +25,14 @@ public class wavespawner : MonoBehaviour
 
         countdown -= Time.deltaTime;
 
-        wavecountdowntext.text = Mathf.Round(countdown).ToString();
+        wavecountdowntext.text = "Next wave in : " + Mathf.Round(countdown).ToString();
     }
 
     IEnumerator SpawnWave(){
         for (int i = 0; i < waveIndex; i++)
         {
             spawnEnemy();
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(spawnrate);
         }
         waveIndex++;
     }
