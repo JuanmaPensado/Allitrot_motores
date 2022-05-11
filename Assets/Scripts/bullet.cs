@@ -35,7 +35,12 @@ public class bullet : MonoBehaviour
     void HitTarget(){
         GameObject effectinst = (GameObject) Instantiate(hitPart,transform.position , transform.rotation);
         Destroy(effectinst, 2f);
-        Destroy(target.gameObject);
+        Damage(target.transform);
         Destroy(gameObject);
+    }
+
+    void Damage(Transform enemy){
+        Enemigo e = enemy.GetComponent<Enemigo>();
+        e.TakeDamage(20);
     }
 }

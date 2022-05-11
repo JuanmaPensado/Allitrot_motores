@@ -8,6 +8,8 @@ public class Enemigo : MonoBehaviour
     private Transform target;
     private int waypointIndex = 0;
 
+    public int health = 100;
+
     void Start()
     {
         target = Waypoints.points[0];
@@ -27,10 +29,27 @@ public class Enemigo : MonoBehaviour
 
     void GetNextWaypoint(){
         if (waypointIndex >= Waypoints.points.Length - 1){
-            Destroy(gameObject);
+
+            EndPath();
             return;
         }
         waypointIndex++;
         target = Waypoints.points[waypointIndex];
+    }
+
+    void EndPath (){
+        playerStats.Lives--;
+        Destroy(gameObject);
+    }
+
+    public void TakeDamage(int amount){
+        health -= amount;
+        if (health <=0){
+            Die();
+        }
+    }
+
+    void Die(){
+        Destroy(gameObject);
     }
 }
