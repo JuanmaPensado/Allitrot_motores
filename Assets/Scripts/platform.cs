@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class platform : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private Renderer rend;
+    private Color startColor1;
+    private Color startColor2;
+    private GameObject turret;
+    public Color hoverColor;
+
+    void Start(){
+        rend = GetComponent<Renderer>();
+        startColor1 = rend.materials[1].color;
+        startColor2 = rend.materials[2].color;
+    }
+    void OnMouseEnter (){
+        rend.materials[1].color = hoverColor;
+        rend.materials[2].color = hoverColor;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void OnMouseExit(){
+        rend.materials[1].color = startColor1;
+        rend.materials[2].color = startColor2;
+    }
+
+    void OnMouseDown(){
+        if (turret != null)
+        {
+            Debug.Log("tengo torre");
+            return;
+        }
+
+        GameObject turretToBuild = buildManager.instance.GetTurretToBuild();
+        turret = (GameObject) Instantiate(turretToBuild, transform.position , transform.rotation);
     }
 }
