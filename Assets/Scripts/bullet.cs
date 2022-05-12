@@ -36,9 +36,6 @@ public class bullet : MonoBehaviour
     }
 
     void HitTarget(){
-        GameObject effectinst = (GameObject) Instantiate(hitPart,transform.position,transform.rotation);
-        Destroy(effectinst, 2f);
-        
         if (expradious > 0f){
             Explode();
         }
@@ -52,6 +49,9 @@ public class bullet : MonoBehaviour
     }
 
     void Damage(Transform enemy){
+        GameObject effectinst = (GameObject) Instantiate(hitPart,enemy.position,transform.rotation);
+        Destroy(effectinst, 2f);
+
         Enemigo e = enemy.GetComponent<Enemigo>();
         e.TakeDamage(damage);
         

@@ -16,6 +16,19 @@ MonoBehaviour:
   deathEffect: {fileID: 2715151640702213222, guid: de90802c11b16e5438818a237f1711fd,
     type: 3}
   health: 500
+--- !u!65 &7518277198662665567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6063783850638203806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4999999, y: 0.9, z: 2.4999998}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!1001 &6406241384827152079
 PrefabInstance:
   m_ObjectHideFlags: 0
