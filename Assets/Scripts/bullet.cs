@@ -8,6 +8,7 @@ public class bullet : MonoBehaviour
     public int damage = 20;
 
     public GameObject hitPart;
+    public GameObject hitPart2;
 
     public void spawn (Transform _Target){
         target = _Target;
@@ -44,18 +45,17 @@ public class bullet : MonoBehaviour
             Damage(target.transform);
         }
 
-        
+        GameObject effectinst = (GameObject) Instantiate(hitPart,target.position,transform.rotation);
+        Destroy(effectinst, 2f);
+
         Destroy(gameObject);
     }
 
     void Damage(Transform enemy){
-        GameObject effectinst = (GameObject) Instantiate(hitPart,enemy.position,transform.rotation);
-        Destroy(effectinst, 2f);
-
+        
         Enemigo e = enemy.GetComponent<Enemigo>();
         e.TakeDamage(damage);
-        
-
+    
     }
 
     void Explode(){
@@ -64,6 +64,9 @@ public class bullet : MonoBehaviour
         {
             if (collider.tag == "Enemy")
             {
+                GameObject effectinst = (GameObject) Instantiate(hitPart2,collider.transform.position,transform.rotation);
+                Destroy(effectinst, 2f);
+                
                 Damage(collider.transform);
             }
         }

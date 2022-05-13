@@ -18,8 +18,11 @@ public class Enemigo : MonoBehaviour
     void Update()
     {
         Vector3 dir = target.position - transform.position;
-        transform.LookAt(target);
         transform.Translate(dir.normalized * vel * Time.deltaTime, Space.World);
+
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime*5f).eulerAngles;
+        transform.rotation = Quaternion.Euler(0f,rotation.y,0f);
         
         if (Vector3.Distance(transform.position, target.position) <= 0.4f){
             GetNextWaypoint();
