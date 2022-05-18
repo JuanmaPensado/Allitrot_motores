@@ -8,6 +8,6 @@ public class LivesUI : MonoBehaviour
 
     void Update()
     {
-        livesText.text = playerStats.Lives.ToString();
+        livesText.text = Mathf.Clamp(playerStats.Lives, 0f, Mathf.Infinity).ToString();
     }
 }
