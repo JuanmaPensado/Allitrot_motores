@@ -8,7 +8,7 @@ public class platform : MonoBehaviour
     private Renderer rend;
     private Color startColor1;
     private Color startColor2;
-    private GameObject turret;
+    public GameObject turret;
     public Color hoverColor;
     public GameObject BuildEffect;
     buildManager BuildManager;
@@ -22,11 +22,19 @@ public class platform : MonoBehaviour
     }
     void OnMouseEnter (){
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (BuildManager.GetTurretToBuild() == null) return;
+        if (!BuildManager.CanBuild) return;
         if (turret != null) return;
+        if (BuildManager.HasMoney){
+            rend.materials[1].color = hoverColor;
+            rend.materials[2].color = hoverColor;
+        }
+        else{
+            rend.materials[1].color = Color.red;
+            rend.materials[2].color = Color.red;
+        }
+        
 
-        rend.materials[1].color = hoverColor;
-        rend.materials[2].color = hoverColor;
+        
     }
 
     void OnMouseExit(){
@@ -36,11 +44,10 @@ public class platform : MonoBehaviour
 
     void OnMouseDown(){
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        if (BuildManager.GetTurretToBuild() == null)return;
-        if (turret != null) return;
+        if (!BuildManager.CanBuild) return;
+        if (turret != null) return; //TODO
 
-        GameObject turretToBuild = BuildManager.GetTurretToBuild();
-        turret = (GameObject) Instantiate(turretToBuild, transform.position , transform.rotation);
+        BuildManager.BuildTurretOn(this);
         
         GameObject effect = (GameObject) Instantiate(BuildEffect, transform.position, Quaternion.identity);
         Destroy(effect,2f);

@@ -14,13 +14,28 @@ public class buildManager : MonoBehaviour
         }
         instance = this;
     }
+
+
     public GameObject standardTurretPrefab;
     public GameObject MisileTurretPrefab;
-    private GameObject turretToBuild;
-    public GameObject GetTurretToBuild(){
-        return turretToBuild;
+    private turretblueprint turretToBuild;
+    public bool CanBuild { get {return turretToBuild != null;}}
+    public bool HasMoney { get {return playerStats.Currency >= turretToBuild.cost;}}
+
+    public void BuildTurretOn (platform ptfm){
+        if (playerStats.Currency < turretToBuild.cost){
+            Debug.Log("no hay dineros");
+            return;
+        }
+
+        playerStats.Currency -= turretToBuild.cost;
+        GameObject turret = Instantiate(turretToBuild.prefab, ptfm.transform.position, ptfm.transform.rotation);
+        ptfm.turret = turret;
+        Debug.Log("Turret Build Currency: "+ playerStats.Currency);
     }
-    public void SetTurretToBuild(GameObject turret){
+
+
+    public void SelectTurretToBuild(turretblueprint turret){
         turretToBuild = turret;
     }
 }
