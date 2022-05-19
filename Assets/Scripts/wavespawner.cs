@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class wavespawner : MonoBehaviour
 {
-    public static int EnemiesAlive = 0;
+    public static int EnemiesAlive;
     public float countdown = 10f;
     public float timeBetweenWaves = 10f;
     public float spawnrate = 2f;
@@ -15,6 +15,9 @@ public class wavespawner : MonoBehaviour
     public Text wavecountdowntext;
     private int waveIndex = 1;
 
+    void Start(){
+        EnemiesAlive = 0;
+    }
 
     void Update()
     {
