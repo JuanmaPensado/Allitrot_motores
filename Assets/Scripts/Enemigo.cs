@@ -60,5 +60,6 @@ public class Enemigo : MonoBehaviour
         GameObject effect = (GameObject) Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
         Destroy(effect, 5f);
+        playerStats.Currency += 25;
     }
 }

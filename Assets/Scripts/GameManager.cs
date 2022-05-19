@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     void Start (){
         GameIsOver = false;
+        Time.timeScale = 1f;
     }
     void Update()
     {
