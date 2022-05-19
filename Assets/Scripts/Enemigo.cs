@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemigo : MonoBehaviour
 {
-    public float vel = 10f;
+    public float vel = 10f;    
+    public int monedas = 25;
+    public float Starthealth = 100;
+    private float health;
     private Transform target;
     private int waypointIndex = 0;
     public GameObject deathEffect;
-    public int health = 100;
+
+
+    public Image HealthBar;
 
     void Start()
     {
         target = Waypoints.points[0];
+        health = Starthealth;
     }
 
     void Update()
@@ -45,12 +50,14 @@ public class Enemigo : MonoBehaviour
         GameObject effect = (GameObject) Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         Destroy(gameObject);
+        wavespawner.EnemiesAlive--;
 
     }
 
     public void TakeDamage(int amount){
         health -= amount;
 
+        HealthBar.fillAmount= health / Starthealth;
         if (health <=0){
             Die();
         }
@@ -60,6 +67,7 @@ public class Enemigo : MonoBehaviour
         GameObject effect = (GameObject) Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
         Destroy(effect, 5f);
-        playerStats.Currency += 25;
+        playerStats.Currency += monedas; // CAMBIAR
+        wavespawner.EnemiesAlive--;
     }
 }

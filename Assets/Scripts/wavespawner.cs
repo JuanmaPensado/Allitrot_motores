@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class wavespawner : MonoBehaviour
 {
-    [Header ("Attributes")]
+    public static int EnemiesAlive = 0;
     public float countdown = 10f;
     public float timeBetweenWaves = 10f;
     public float spawnrate = 2f;
-
-    [Header("Unity Setup")]
-    public Transform enemyPrefab;
+    public Transform Estandard_enemyPrefab;
+    public Transform Quick_enemyPrefab;
+    public Transform Tank_enemyPrefab;
     public Transform spawnPoint;
     public Text wavecountdowntext;
     private int waveIndex = 1;
@@ -18,9 +18,13 @@ public class wavespawner : MonoBehaviour
 
     void Update()
     {
-        if (countdown <= 0f){
+
+        if (EnemiesAlive > 0) return;
+        if (countdown <= 0f)
+        {
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
+            return;
         }
 
         countdown -= Time.deltaTime;
@@ -33,17 +37,45 @@ public class wavespawner : MonoBehaviour
     IEnumerator SpawnWave(){
         
         playerStats.Rounds++;
+        int tamañoWave = Random.Range(waveIndex, waveIndex*2);
+        Transform enemigo = Estandard_enemyPrefab ;
+        Debug.Log(waveIndex+","+tamañoWave);
         
-        for (int i = 0; i < waveIndex; i++)
+        for (int i = 0; i < tamañoWave; i++)
         {
-            spawnEnemy();
-            yield return new WaitForSeconds(spawnrate);
+
+            if(waveIndex >= 5){
+                int numenemigo = Random.Range(0,3);
+                if (numenemigo == 0) enemigo = Estandard_enemyPrefab;
+                if (numenemigo == 1) enemigo = Quick_enemyPrefab;
+                if (numenemigo == 2) enemigo = Tank_enemyPrefab;
+                Debug.Log(">=5, " + numenemigo );
+                spawnEnemy(enemigo);
+                yield return new WaitForSeconds(spawnrate);
+                
+            }
+            else if(waveIndex >=3){
+                int numenemigo = Random.Range(0,2);
+                if (numenemigo == 0) enemigo = Estandard_enemyPrefab;
+                if (numenemigo == 1) enemigo = Quick_enemyPrefab;
+                Debug.Log(">=3, " + numenemigo );
+                spawnEnemy(enemigo);
+                yield return new WaitForSeconds(spawnrate);
+            }
+            else{
+                Debug.Log("else");
+                spawnEnemy(enemigo);
+                yield return new WaitForSeconds(spawnrate);
+            }
+            
         }
+        
         waveIndex++;
     }
 
-    void spawnEnemy(){
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+    void spawnEnemy(Transform enemigo){
+        Instantiate(enemigo, spawnPoint.position, spawnPoint.rotation);
+        EnemiesAlive++;
     }
 }
 
