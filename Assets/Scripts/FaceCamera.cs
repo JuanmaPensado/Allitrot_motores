@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FaceCamera : MonoBehaviour
 {
-    public Transform mLookAt;
+    private Transform mLookAt;
+    public string Camera_tag;
     private Transform localTrans;
     void Start()
     {
         localTrans = GetComponent<Transform>();
-        //mLookAt = GetComponent
+        mLookAt = GameObject.FindWithTag(Camera_tag).transform;
     }
 
     // Update is called once per frame
