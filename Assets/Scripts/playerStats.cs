@@ -9,9 +9,14 @@ public class playerStats : MonoBehaviour
 
     public static int Currency;
     public int startCurrency = 400;
+
+    public static int Rounds;
+
+
     void Start()
     {
         Lives = startlives; 
         Currency = startCurrency;
+        Rounds = 0;
     }
 }

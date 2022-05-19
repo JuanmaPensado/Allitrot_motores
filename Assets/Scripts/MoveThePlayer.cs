@@ -21,6 +21,10 @@ public class MoveThePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.GameIsOver){
+            this.enabled = false;
+            return;
+        }
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
