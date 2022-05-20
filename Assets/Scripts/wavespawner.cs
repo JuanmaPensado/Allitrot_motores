@@ -34,7 +34,7 @@ public class wavespawner : MonoBehaviour
 
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
 
-        wavecountdowntext.text = string.Format("{0:00.00}",countdown);
+        wavecountdowntext.text = string.Format("Wave {0:00}\n"+"{1:00.00}",waveIndex,countdown);
     }
 
     IEnumerator SpawnWave(){
@@ -42,7 +42,6 @@ public class wavespawner : MonoBehaviour
         playerStats.Rounds++;
         int tamañoWave = Random.Range(waveIndex, waveIndex*2);
         Transform enemigo = Estandard_enemyPrefab ;
-        Debug.Log(waveIndex+","+tamañoWave);
         
         for (int i = 0; i < tamañoWave; i++)
         {
@@ -52,7 +51,7 @@ public class wavespawner : MonoBehaviour
                 if (numenemigo == 0) enemigo = Estandard_enemyPrefab;
                 if (numenemigo == 1) enemigo = Quick_enemyPrefab;
                 if (numenemigo == 2) enemigo = Tank_enemyPrefab;
-                Debug.Log(">=5, " + numenemigo );
+
                 spawnEnemy(enemigo);
                 yield return new WaitForSeconds(spawnrate);
                 
@@ -61,12 +60,12 @@ public class wavespawner : MonoBehaviour
                 int numenemigo = Random.Range(0,2);
                 if (numenemigo == 0) enemigo = Estandard_enemyPrefab;
                 if (numenemigo == 1) enemigo = Quick_enemyPrefab;
-                Debug.Log(">=3, " + numenemigo );
+
                 spawnEnemy(enemigo);
                 yield return new WaitForSeconds(spawnrate);
             }
             else{
-                Debug.Log("else");
+
                 spawnEnemy(enemigo);
                 yield return new WaitForSeconds(spawnrate);
             }

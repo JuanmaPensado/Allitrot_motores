@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vel: 5
-  monedas: 50
-  Starthealth: 100
+  monedas: 25
+  Starthealth: 200
   deathEffect: {fileID: 2715151640702213222, guid: de90802c11b16e5438818a237f1711fd,
     type: 3}
   HealthBar: {fileID: 6732490614413707563}
